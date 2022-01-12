@@ -1,6 +1,6 @@
 # LOGIN COMPLETO CON EXPRESS
 
-![portada](img/cover.png)
+![portada](public/img/cover.png)
 
 ## Guía paso a paso... punto de partida
 
