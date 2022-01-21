@@ -1,34 +1,43 @@
 const express = require('express');
-const app = express();
 const path = require('path');
-app.use(express.static('public'));
+const app = express();
+/* app.use(express.static('public')); */
 
-const bycript = require('bcryptjs');
+/* routes */
+let usersRouter = require('./routers/usersRouter');
+
+/* const bycript = require('bcryptjs'); */
 
 /* ejs */
 app.set("view engine", "ejs");
-app.set('views', path.join(__dirname, 'views')); 
+app.set("views", path.join(__dirname, "views")); 
 
 //Middleware integrada en Express
+app.use(express.static(path.join(__dirname, "../../public"))); /* esta en carpeta src... cm va? */
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 /* session */
-const session = require('express-session');
+/* const session = require('express-session');
 app.use(session({
     secret: 'login',
     resave: false,
     saveUninitialized: true,
-}));
+})); */
 
-/* app.use(cookieParser()) */
+/* app.use(cookieParser())  */
 
-/* route */
-let login = require('./routers/loginRouter');
 
-app.use('/users', login);
+
+
+app.use('/', usersRouter);
 
 
 /* puerto */
-app.listen(3001, () => 
-console.log('Servidor levantado'));
+const PORT = 3000
+app.listen(PORT, () => console.log(
+    `
+        Puerto levantado
+        http://localhost:${PORT}
+    `
+))
